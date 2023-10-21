@@ -10,7 +10,13 @@ const bcrypt = require('bcrypt');
 const app = express();
 const port = 8000;
 const cors = require('cors');
-app.use(cors());
+app.use(cors(
+    {
+        origin: ["http://192.168.0.102:8081"],
+        methods: ["POST","GET","PUT","DELETE"],
+        credentials: true
+    }
+));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
