@@ -697,10 +697,10 @@ app.get("/users/:userId", (req, res) => {
     console.log(loggedInUserId);
     
     User.findOne({_id: loggedInUserId}).then((users) => {
-        res.status(200).json(users)
+        return res.status(200).json(users)
     }).catch((error) => {
         console.log("Error retrieving users", error);
-        res.status(200).json({message:"Error retrieving users"})
+        return res.status(200).json({message:"Error retrieving users"})
     })
 });
 
