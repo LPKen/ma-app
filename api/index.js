@@ -700,7 +700,7 @@ app.get("/users/:userId", (req, res) => {
         return res.status(200).json(users)
     }).catch((error) => {
         console.log("Error retrieving users", error);
-        return res.status(200).json({message:"Error retrieving users"})
+        return res.status(500).json({message:"Error retrieving users"})
     })
 });
 
