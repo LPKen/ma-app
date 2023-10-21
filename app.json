@@ -2,6 +2,7 @@
   "expo": {
     "name": "Scalearn",
     "slug": "scalearn",
+    "description": "Upscale your learing with Scalearn.",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logo1_3square.png",
