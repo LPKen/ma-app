@@ -12,7 +12,7 @@ const port = 8000;
 const cors = require('cors');
 app.use(cors(
     {
-        origin: ["http://192.168.0.102:8081"],
+        origin: ["exp://u.expo.dev/update/047c1a96-8a23-494f-a428-32adeee7d980","exp://u.expo.dev/update/8fc542c3-9dce-4549-b83f-1364dc1f0eb7"],
         methods: ["POST","GET","PUT","DELETE"],
         credentials: true
     }
