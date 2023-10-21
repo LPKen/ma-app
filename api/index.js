@@ -698,6 +698,7 @@ app.get("/users/:userId", (req, res) => {
     
     User.findOne({_id: loggedInUserId}).then((users) => {
         res.status(200).json(users)
+        res.send("boij")
     }).catch((error) => {
         console.log("Error retrieving users", error);
         res.status(500).json({message:"Error retrieving users"})
