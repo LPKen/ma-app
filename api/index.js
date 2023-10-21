@@ -842,3 +842,8 @@ app.get("/infos/:article", (req, res) => {
         res.status(500).json({message:"Error accessing information"})
     })
 })
+
+app.get("/", (req, res) => {
+  console.log("Hello world!");
+})
+
