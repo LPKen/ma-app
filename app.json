@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "ma",
-    "slug": "ma",
+    "name": "Scalearn",
+    "slug": "scalearn",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logo1_3.png",
+    "icon": "./assets/logo1_3square.png",
     "userInterfaceStyle": "dark",
     "splash": {
-      "image": "./assets/logo1_3.png",
+      "image": "./assets/logo1_3square.png",
       "resizeMode": "contain",
       "backgroundColor": "#12142A"
     },
@@ -15,7 +15,7 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false
     },
     "android": {
       "adaptiveIcon": {
