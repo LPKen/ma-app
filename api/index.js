@@ -109,7 +109,7 @@ const createToken = (userId) => {
         userId: userId,
     };
     //Generate the token with key and expiration time
-    const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '30d'})
+    const accessToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {expiresIn: '30d'})
     
     return accessToken;
 }
