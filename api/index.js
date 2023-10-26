@@ -8,9 +8,15 @@ const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt');
 
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
 const cors = require('cors');
-app.use(cors());
+app.use(cors(
+    {
+        origin: ["exp://u.expo.dev/update/047c1a96-8a23-494f-a428-32adeee7d980","exp://u.expo.dev/update/8fc542c3-9dce-4549-b83f-1364dc1f0eb7"],
+        methods: ["POST","GET","PUT","DELETE"],
+        credentials: true
+    }
+));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -103,7 +109,7 @@ const createToken = (userId) => {
         userId: userId,
     };
     //Generate the token with key and expiration time
-    const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '30d'})
+    const accessToken = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: '30d'})
     
     return accessToken;
 }
@@ -691,10 +697,10 @@ app.get("/users/:userId", (req, res) => {
     console.log(loggedInUserId);
     
     User.findOne({_id: loggedInUserId}).then((users) => {
-        res.status(200).json(users)
+        return res.status(200).json(users)
     }).catch((error) => {
         console.log("Error retrieving users", error);
-        res.status(500).json({message:"Error retrieving users"})
+        return res.status(500).json({message:"Error retrieving users"})
     })
 });
 
@@ -836,3 +842,8 @@ app.get("/infos/:article", (req, res) => {
         res.status(500).json({message:"Error accessing information"})
     })
 })
+
+app.get("/", (req, res) => {
+  res.send("Hello world!");
+})
+
