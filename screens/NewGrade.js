@@ -11,7 +11,7 @@ import {
 } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import axios from "axios";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute, useScrollToTop, useFocusEffect } from "@react-navigation/native";
 import { useFonts } from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 //import RNPickerSelect from 'react-native-picker-select';
@@ -28,12 +28,13 @@ const NewGrade = () => {
     const [hours, setHours] = useState();
     const [methods, setMethods] = useState([]);
     const [special, setSpecial] = useState(false);
-    const [specialText, setSpecialText] = useState("Normale Vorbereitung");
+    const [specialText, setSpecialText] = useState("Normal");
     const [tips, setTips] = useState("");
+
     const learnmethods = [
         "Aufgaben/Fallbeispiele lösen", "Texte/Artikel/Unterlagen lesen", "Zusammenfassungen schreiben",
         "Blurting", "Karteikarten", "Den Stoff jemandem erklären",
-        "Visualisierung (z.B. Mindmap)"
+        "Visualisierung (z.B. Mindmap)", "Videos/Präsentationen anschauen"
     ]
     const [selMethods, setSelMethods] = useState([]);
     const handleGrade = () => {
@@ -66,7 +67,7 @@ const NewGrade = () => {
             // here, we send the grade, but also calculate all the important figures:
             // average of subject and semester
             // pluspoints of subject and semester
-            axios.post("http://192.168.0.102:8000/grades", Grade)
+            axios.post("https://ma-app.vercel.app/grades", Grade)
                 .then((response) => {
                     setName("");
                     setWeight("");
@@ -86,6 +87,9 @@ const NewGrade = () => {
             "Bitte gib mindestens Name, Gewichtung und Note an.")
         }
     }
+
+
+
 
 
     const [loaded] = useFonts({
@@ -112,10 +116,10 @@ const NewGrade = () => {
     const handleSpecial = () => {
         if (special) {
             setSpecial(false);
-            setSpecialText("Normale Vorbereitung");
+            setSpecialText("Normal");
         } else {
             setSpecial(true);
-            setSpecialText("Aussergewöhnliche Vorbereitung");
+            setSpecialText("Aussergewöhnlich");
         }
     }
 
@@ -341,6 +345,7 @@ const NewGrade = () => {
                                 Aussergewöhnliche Prüfungen kommen nicht in die Statistiken.{"\n"}{"\n"}
                                 Beispiele für Prüfungen mit aussergewöhnlicher Vorbereitung: Mündliche Note, Abschlussprüfung, Vortrag, Singprüfung, zusammengesetzte Note etc.
                                 </Text>
+                            <Text style={{fontFamily: 'InterB', fontSize: 16, color: 'white', marginTop: 10}}>Aktuell: {specialText}</Text>
                             <Pressable onPress={() => handleSpecial()} style={{
                                 backgroundColor: special? '#ff4490': '#FFB600',
                                 padding: 5,
@@ -349,7 +354,7 @@ const NewGrade = () => {
                                 width: 200,
                                 alignItems: 'center'
                             }}>
-                                <Text style={{fontFamily: 'InterB', fontSize: 16, textAlign: 'center'}}>{specialText}</Text>
+                                <Text style={{fontFamily: 'InterB', fontSize: 16, textAlign: 'center'}}>Ändern</Text>
                             </Pressable>
                         </View>
                             {displayFurther()}

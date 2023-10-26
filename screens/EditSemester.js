@@ -21,9 +21,8 @@ const EditSemester = () => {
 
     const getSemester = async () => {
         axios
-        .get(`http://192.168.0.102:8000/editsemester/${semester}`)
+        .get(`https://ma-app.vercel.app/editsemester/${semester}`)
         .then((response) => {
-            console.log(response.data);
             setNewSemester(response.data[0].name);
         }).catch((error) => {
             console.log("error retrieving semester", error);
@@ -33,15 +32,13 @@ const EditSemester = () => {
     const handleSemester = () => {
         var ipts = [newSemester];
         const allInputsFilled = ipts.every((input) => input.trim() !== '');
-        console.log(allInputsFilled, ipts);
 
         if (allInputsFilled) {
             const Semester = {
                 "name": newSemester,
             };
-            console.log("Sem:",Semester);
             // send a POST  request to the backend API to register the user
-            axios.put(`http://192.168.0.102:8000/semesters/${semester}`, Semester)
+            axios.put(`https://ma-app.vercel.app/semesters/${semester}`, Semester)
                 .then((response) => {
                     setNewSemester("");
                     navigation.navigate("Home");

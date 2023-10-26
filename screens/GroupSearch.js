@@ -36,7 +36,6 @@ const GroupSearch = () => {
         setResults([]);
         // Convert the keyword to lowercase for a case-insensitive search
         const lowerKeyword = keyword.toLowerCase();
-        console.log(lowerKeyword);
         
         //fetch groups
         const token = await AsyncStorage.getItem("authToken");
@@ -45,7 +44,7 @@ const GroupSearch = () => {
         setUserId(userId);
 
         axios
-        .get(`http://192.168.0.102:8000/groups/search/${userId}`)
+        .get(`https://ma-app.vercel.app/groups/search/${userId}`)
             .then((response) => {
                 setGroups(response.data)
                 setLoading(false);
@@ -56,7 +55,6 @@ const GroupSearch = () => {
         var inclGroup = []
         for (i = 0; i < groups.length; i++) {
             if(groups[i].name.toLowerCase().includes(lowerKeyword)) {
-                console.log(groups[i].name)
                 inclGroup.push(groups[i]);
             }
         }
@@ -64,7 +62,6 @@ const GroupSearch = () => {
             inclGroup = [];
         }
         setResults(inclGroup);
-        console.log("Res",results);
       }
 
     const handleRequest = async (groupId) => {
@@ -72,9 +69,8 @@ const GroupSearch = () => {
         const decodedToken = jwt_decode(token);
         const userId = decodedToken.userId;
         setUserId(userId);
-        console.log("Gruppe",groupId);
 
-        axios.post(`http://192.168.0.102:8000/groups/${groupId}`, {user_id: userId})
+        axios.post(`https://ma-app.vercel.app/groups/${groupId}`, {user_id: userId})
             .then((response) => {
                 navigation.navigate("Gruppen");
                 Alert.alert("Anfrage versendet!. 🎉",

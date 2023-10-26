@@ -17,7 +17,6 @@ import { Ionicons } from '@expo/vector-icons';
 const NewSubject = () => {
     const navigation = useNavigation();
     const route = useRoute();
-    console.log("jgfd",route.params);
     const semId = route.params._id;
     const sname = route.params.name;
     const givenSubjects = [
@@ -34,7 +33,6 @@ const NewSubject = () => {
     const handleSubject = () => {
         var ipts = [Name, Weight];
         const allInputsFilled = ipts.every((input) => input.trim() !== '');
-        console.log(allInputsFilled, ipts);
 
         if (allInputsFilled) {
             const Subject = {
@@ -49,9 +47,8 @@ const NewSubject = () => {
                 Subject.weight = 1;
             }
             // send a POST  request to the backend API to register the user
-            axios.post("http://192.168.0.102:8000/subjects", Subject)
+            axios.post("https://ma-app.vercel.app/subjects", Subject)
                 .then((response) => {
-                    console.log(response);
                     setName("");
                     setWeight("");
                     navigation.navigate("Semester", route.params);
@@ -69,13 +66,11 @@ const NewSubject = () => {
         setResults([]);
         // Convert the keyword to lowercase for a case-insensitive search
         const lowerKeyword = keyword.toLowerCase();
-        console.log(lowerKeyword);
         
         //fetch groups
         var inclGroup = []
         for (i = 0; i < givenSubjects.length; i++) {
             if(givenSubjects[i].toLowerCase().includes(lowerKeyword)) {
-                console.log(givenSubjects[i])
                 inclGroup.push(givenSubjects[i]);
             }
         }
@@ -87,7 +82,6 @@ const NewSubject = () => {
         //make the button darker
 
 
-        console.log("Res",results);
       }
 
     return (

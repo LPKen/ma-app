@@ -33,9 +33,8 @@ const EditGroup = () => {
 
     const getGroup = () => {
         axios
-        .get(`http://192.168.0.102:8000/groups/gadmin/${group}`)
+        .get(`https://ma-app.vercel.app/groups/gadmin/${group}`)
         .then((response) => {
-            console.log(response.data);
             setName(response.data[0].name);
             setColor(response.data[0].pfp);
         }).catch((error) => {
@@ -46,7 +45,6 @@ const EditGroup = () => {
     const handleGroup = async () => {
         var ipts = [Name, color];
         const allInputsFilled = ipts.every((input) => input.trim() !== '');
-        console.log(allInputsFilled, ipts);
 
         //fetch groups
         const token = await AsyncStorage.getItem("authToken");
@@ -54,7 +52,6 @@ const EditGroup = () => {
         const userId = decodedToken.userId;
         setUserId(userId)
 
-        console.log(userId);
 
         if (allInputsFilled) {
             const Group = {
@@ -62,9 +59,8 @@ const EditGroup = () => {
                 pfp: color,
             }
 
-            axios.put(`http://192.168.0.102:8000/groups/edit/${group}`, Group)
+            axios.put(`https://ma-app.vercel.app/groups/edit/${group}`, Group)
                 .then((response) => {
-                    console.log(response);
                     setName("");
                     setColor("#ffffff");
                     navigation.navigate("Gruppen");

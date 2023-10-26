@@ -1,9 +1,10 @@
 {
   "expo": {
-    "name": "Scalearn",
+    "name": "Scalearn Beta 1.1",
     "slug": "scalearn",
+    "privacy": "public",
     "description": "Upscale your learing with Scalearn.",
-    "version": "1.0.0",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./assets/logo1_3square.png",
     "userInterfaceStyle": "dark",
@@ -16,16 +17,29 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": false
+      "supportsTablet": false,
+      "bundleIdentifier": "com.maken.scalearn"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "backgroundColor": "#12142A"
+      },
+      "package": "com.maken.scalearn"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4aad10f5-2304-4639-b242-066b7c4038e3"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/4aad10f5-2304-4639-b242-066b7c4038e3"
     }
   }
 }

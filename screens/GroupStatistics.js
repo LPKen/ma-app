@@ -52,7 +52,7 @@ const GroupStatistics = () => {
     for (i = 0; i < subjects.length; i++) {
 
         await axios
-        .get(`http://192.168.0.102:8000/grades/${subjects[i]}`)
+        .get(`https://ma-app.vercel.app/grades/${subjects[i]}`)
         .then((response) => {
             if (response.data.length > 0) {
                 for (j = 0; j < response.data.length; j++) {
@@ -65,16 +65,15 @@ const GroupStatistics = () => {
                     gradeStats.avg_grade_days = avgGradeDays(gradeArray, userId);
                     gradeStats.freq_methods = frequency(gradeArray);
                     gradeStats.avg_methods = avgMethods(gradeArray);
-                    setLoading(false);
                 }
             } else {
-                setLoading(false);
             }
         }).catch((error) => {
             console.log("error retrieving users", error);
         });
     }
     setStats(gradeStats);
+    setLoading(false);
   }
 
 
@@ -91,7 +90,7 @@ const GroupStatistics = () => {
 
   const avgDays = (days, user) => {
     axios
-    .get(`http://192.168.0.102:8000/users/${user}`)
+    .get(`https://ma-app.vercel.app/users/${user}`)
     .then((response) => {
         setProportionals(response.data.propWeight);
     })
@@ -119,7 +118,7 @@ const GroupStatistics = () => {
 
   const avgHours = (hours, user) => {
     axios
-    .get(`http://192.168.0.102:8000/users/${user}`)
+    .get(`https://ma-app.vercel.app/users/${user}`)
     .then((response) => {
         setProportionals(response.data.propWeight);
     })
@@ -183,7 +182,7 @@ const GroupStatistics = () => {
     const resultArray = [];
 
     axios
-        .get(`http://192.168.0.102:8000/users/${user}`)
+        .get(`https://ma-app.vercel.app/users/${user}`)
         .then((response) => {
             setProportionals(response.data.propWeight);
         })
@@ -237,7 +236,7 @@ const GroupStatistics = () => {
         const resultArray = [];
 
         axios
-            .get(`http://192.168.0.102:8000/users/${user}`)
+            .get(`https://ma-app.vercel.app/users/${user}`)
             .then((response) => {
                 setProportionals(response.data.propWeight);
             })
@@ -326,15 +325,8 @@ const GroupStatistics = () => {
     useEffect(() => {
         setLoading(true);
         buildStats(subjects); 
-    },[]);
+    },[subjects, userId]);
 
-  useFocusEffect(
-    React.useCallback(() => {
-    // Fetch data whenever the screen gains focus (e.g., when navigating back)
-    setLoading(true);
-    buildStats(subjects);
-    }, [subjects])
-);
 
 const content = () => {
     if (loading) {
@@ -565,6 +557,14 @@ const content = () => {
                                     fontFamily: 'PDSemi'
                                 }}
                             >Vis: Visualisierung (z.B. Mindmap)</Text>
+                            <Text
+                                style={{
+                                    marginTop: 5,
+                                    color: 'white',
+                                    fontSize: 16,
+                                    fontFamily: 'PDSemi'
+                                }}
+                            >Vid: Videos/Präsentationen anschauen</Text>
                         </View>
 
                     </View>

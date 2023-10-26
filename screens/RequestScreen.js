@@ -35,9 +35,8 @@ const RequestScreen = () => {
         const userId = decodedToken.userId;
         setUserId(userId);
 
-        console.log("Admin",userId);
 
-        await axios.get(`http://192.168.0.102:8000/groups/admin/${userId}`)
+        await axios.get(`https://ma-app.vercel.app/groups/admin/${userId}`)
             .then((response) => {
                 reqCaterer(response.data)
             }).catch((error) => {
@@ -51,7 +50,7 @@ const RequestScreen = () => {
         var userArray = [];
         for (i = 0; i < req.length; i++) {
             for (j = 0; j < req[i].requests.length; j++) {
-                await axios.get(`http://192.168.0.102:8000/users/${req[i].requests[j]}`)
+                await axios.get(`https://ma-app.vercel.app/users/${req[i].requests[j]}`)
                     .then((response) => {
                         username = response.data.name
                     }).catch((error) => {
@@ -66,15 +65,13 @@ const RequestScreen = () => {
                 userArray.push(userReq);
             }
         }
-        console.log("userArray:", userArray);
         setRequests(userArray);
         setLoading(false);
     }
 
     const handleAccept = async (user, group) => {
-        axios.post(`http://192.168.0.102:8000/groups/accept/${group}`, {user_id: user})
+        axios.post(`https://ma-app.vercel.app/groups/accept/${group}`, {user_id: user})
             .then((response) => {
-                console.log(response);
                 fetchRequests();
                 Alert.alert("Deine Gruppe hat ein neues Mitglied! 🎉");
             })
@@ -84,9 +81,8 @@ const RequestScreen = () => {
     }
 
     const handleReject = async (user, group) => {
-        axios.post(`http://192.168.0.102:8000/groups/reject/${group}`, {user_id: user})
+        axios.post(`https://ma-app.vercel.app/groups/reject/${group}`, {user_id: user})
             .then((response) => {
-                console.log(response);
                 fetchRequests();
             })
             .catch((error) => {

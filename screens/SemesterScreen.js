@@ -14,7 +14,6 @@ const SemesterScreen = () => {
 
     //we get the entire information about the semester
     const semester = route.params;
-    console.log("RP",semester);
     //encodeURIComponent(term);
     const navigation = useNavigation();
 
@@ -22,7 +21,7 @@ const SemesterScreen = () => {
         var sharedSubs = [];
         var sharedTexts = [];
         axios
-            .get(`http://192.168.0.102:8000/subjects/${semester._id}`)
+            .get(`https://ma-app.vercel.app/subjects/${semester._id}`)
             .then((response) => {
                 setSubjects(response.data)
                 calcPA(response.data)
@@ -44,7 +43,7 @@ const SemesterScreen = () => {
     };
 
     const updateSem = async (update) => {
-        axios.put(`http://192.168.0.102:8000/semester/${semester._id}`, update)
+        axios.put(`https://ma-app.vercel.app/semester/${semester._id}`, update)
             .then((response) => {
             })
             .catch((error) => {
@@ -60,9 +59,8 @@ const SemesterScreen = () => {
             update.shared = true;
         }
 
-        axios.put(`http://192.168.0.102:8000/sharesubjects/${subjects[index]._id}`, update)
+        axios.put(`https://ma-app.vercel.app/sharesubjects/${subjects[index]._id}`, update)
         .then((response) => {
-            console.log(response.data);
             fetchSub();
         })
         .catch((error) => {
@@ -114,7 +112,7 @@ const SemesterScreen = () => {
                 text: 'Ja',
                 onPress: () => {
                 axios
-                    .delete(`http://192.168.0.102:8000/deletesubjects/${id}`)
+                    .delete(`https://ma-app.vercel.app/deletesubjects/${id}`)
                     .then((response) => {
                         fetchSub();
                     })
@@ -124,7 +122,7 @@ const SemesterScreen = () => {
                 
 
                 axios
-                    .delete(`http://192.168.0.102:8000/grades/${id}`)
+                    .delete(`https://ma-app.vercel.app/grades/${id}`)
                     .then((response) => {
                     })
                     .catch((error) => {
@@ -151,10 +149,10 @@ const SemesterScreen = () => {
                             color: '#FFB600',
                             fontSize: 40, 
                             fontWeight: 'medium', 
-                            fontFamily: 'PDBold'
+                            fontFamily: 'PDBold',
+                            marginRight: 10,
                             }}>{semester.name}</Text>
                             <Pressable onPress={() => navigation.navigate("NewSubject", {name: semester.name, _id: semester._id})}style={{
-                                    marginLeft: 10, 
                                     textAlign: 'center',
                                     borderRadius: 5
                                     }}>
@@ -169,32 +167,39 @@ const SemesterScreen = () => {
                         marginTop: 20,
 
                         }}>
+                        <View style={{
+                            flexDirection:'row', 
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            marginBottom: 5
+                            }}>
+                            <Text style={{
+                                fontSize: 24,
+                                color: '#FFB600',
+                                fontFamily: 'PDSemi'
+                                }}>{post.name}</Text>
+                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                <Pressable onPress={() => navigation.navigate("EditSubject", {subject: post._id, name: semester.name, _id: semester._id})}>
+                                    <Ionicons name="ios-create-outline" size={26} color='#FFB600' />
+                                </Pressable>
+                                <Pressable style={{marginLeft: 15}} onPress={() => handleDelete(post._id)}>
+                                    <Ionicons name="ios-trash-outline" size={26} color='#FFB600' />
+                                </Pressable>
+                            </View>
+                        </View>
+                        <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Pluspunkte: {post.pluspoints}</Text>
+                        <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Notenschnitt: {post.average}</Text>
+                        <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Gewichtung: {post.weight}</Text>
                         <Pressable onPress={() => updateShared(index)} style={{
                                 backgroundColor: shared[index]? '#FFB600': '#ff4490',
                                 padding: 5,
                                 borderRadius: 5,
                                 width: 200,
-                                alignItems: 'center'
+                                alignItems: 'center',
+                                marginTop: 15
                         }}>
                             <Text style={{fontFamily: 'InterB', fontSize: 16}}>{shareText[index]}</Text>
                         </Pressable>
-                        <Text style={{
-                            fontSize: 24,
-                            marginTop: 15,
-                            color: '#FFB600',
-                            fontFamily: 'PDSemi'
-                        }}>{post.name}</Text>
-                        <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Pluspunkte: {post.pluspoints}</Text>
-                        <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Notenschnitt: {post.average}</Text>
-                        <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Gewichtung: {post.weight}</Text>
-                        <View style={{flexDirection:'row', marginTop: 10}}>
-                        <Pressable onPress={() => navigation.navigate("EditSubject", {subject: post._id, name: semester.name, _id: semester._id})}>
-                                <Ionicons name="ios-create-outline" size={26} color='#FFB600' />
-                            </Pressable>
-                            <Pressable style={{marginLeft: 15}} onPress={() => handleDelete(post._id)}>
-                                <Ionicons name="ios-trash-outline" size={26} color='#FFB600' />
-                            </Pressable>
-                        </View>
                     </Pressable>
                     ))}
                 </View>

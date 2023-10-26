@@ -16,7 +16,7 @@ const InfoScreen = () => {
     setLoading(true);
     const fetchInfo = async () => {
         axios
-            .get('http://192.168.0.102:8000/infos/')
+            .get('https://ma-app.vercel.app/infos/')
             .then((response) => {
                 setInfo(response.data)
                 setLoading(false);
@@ -25,7 +25,6 @@ const InfoScreen = () => {
             });
         };
         fetchInfo();
-        console.log(info)
   }, []);
 
 

@@ -35,7 +35,7 @@ const GroupSubjects = () => {
   const fetchSubjects = async (group) => {
     //1. Get users who are members in the group
     await axios
-        .get(`http://192.168.0.102:8000/groups/users/${group}`)
+        .get(`https://ma-app.vercel.app/groups/users/${group}`)
             .then((response) => {
                 findSemesters(response.data[0].members);
             }).catch((error) => {
@@ -51,7 +51,7 @@ const GroupSubjects = () => {
     var allUsers = [];
     for (i = 0; i < users.length; i++) {
       await axios
-            .get(`http://192.168.0.102:8000/users/${users[i]}`)
+            .get(`https://ma-app.vercel.app/users/${users[i]}`)
             .then((response) => {
               allUsers.push(response.data);
             })
@@ -60,7 +60,7 @@ const GroupSubjects = () => {
             });
       
       await axios
-            .get(`http://192.168.0.102:8000/semesters/${users[i]}`)
+            .get(`https://ma-app.vercel.app/semesters/${users[i]}`)
             .then((response) => {
                 if (response.data != [] && allUsers[i].shareGrades) {
                   for (j = 0; j < response.data.length; j++) {
@@ -79,7 +79,7 @@ const GroupSubjects = () => {
     var allSubs = []
     for (k = 0; k < semester.length; k++) {
       await axios
-            .get(`http://192.168.0.102:8000/subjects/${semester[k]}`)
+            .get(`https://ma-app.vercel.app/subjects/${semester[k]}`)
             .then((response) => {
                 if (response.data != []) {
                   for (l = 0; l < response.data.length; l++) {
@@ -101,7 +101,7 @@ const GroupSubjects = () => {
 
     subjects.forEach(item => {
       generalArray.push(item.sub_id);
-      const existingItem = resultArray.find(resultItem => resultItem.sub_name === item.sub_name);
+      const existingItem = resultArray.find(resultItem => resultItem.sub_name.trim() === item.sub_name);
       if (existingItem) {
         existingItem.sub_ids.push(item.sub_id);
       } else {
@@ -114,14 +114,12 @@ const GroupSubjects = () => {
     setLoading(false);
   }
 
+  useEffect(() => {
+    setLoading(true);
+    fetchSubjects(group._id);
+    
+  }, [group]);
 
-  useFocusEffect(
-      React.useCallback(() => {
-      // Fetch data whenever the screen gains focus (e.g., when navigating back)
-      setLoading(true);
-      fetchSubjects(group._id);
-      }, [group])
-  );
 
 
   const content = () => {

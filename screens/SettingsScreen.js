@@ -39,7 +39,7 @@ const SettingsScreen = () => {
         setUserId(userId);
 
         await axios
-            .get(`http://192.168.0.102:8000/users/${userId}`)
+            .get(`https://ma-app.vercel.app/users/${userId}`)
             .then((response) => {
                 if (response.data.shareGrades) {
                     setShareText("An")
@@ -74,9 +74,8 @@ const SettingsScreen = () => {
             update.shareGrades = true;
         }
 
-        await axios.put(`http://192.168.0.102:8000/settings/${userId}`,update)
+        await axios.put(`https://ma-app.vercel.app/settings/${userId}`,update)
             .then((response) => {
-                console.log(response.data);
             })
             .catch((error) => {
                 console.log("update of pa failed", error);
@@ -95,9 +94,8 @@ const SettingsScreen = () => {
             update.propWeight = true;
         }
 
-        await axios.put(`http://192.168.0.102:8000/settings/${userId}`,update)
+        await axios.put(`https://ma-app.vercel.app/settings/${userId}`,update)
             .then((response) => {
-                console.log(response.data);
             })
             .catch((error) => {
                 console.log("update of pa failed", error);

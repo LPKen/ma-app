@@ -26,7 +26,7 @@ const NewPassword = () => {
 
     const getUser = () => {
         axios
-        .get(`http://192.168.0.102:8000/users/${user}`)
+        .get(`https://ma-app.vercel.app/users/${user}`)
         .then((response) => {;
             setName(response.data.name);
             setColor(response.data.pfp);
@@ -42,7 +42,7 @@ const NewPassword = () => {
             "confirm": confirmPassword
         };
         // send a POST  request to the backend API to register the user
-        axios.put(`http://192.168.0.102:8000/password/${user}`, pwUpdate)
+        axios.put(`https://ma-app.vercel.app/password/${user}`, pwUpdate)
             .then((response) => {
             setPassword("");
             setConfirmPassword("");

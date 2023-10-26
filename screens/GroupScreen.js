@@ -37,9 +37,8 @@ useFocusEffect(
         const decodedToken = jwt_decode(token);
         const userId = decodedToken.userId;
         setUserId(userId);
-        console.log("GruppenUser",userId);
         await axios
-        .get(`http://192.168.0.102:8000/groups/${userId}`)
+        .get(`https://ma-app.vercel.app/groups/${userId}`)
             .then((response) => {
                 setGroup(response.data)
                 setLoading(false);
@@ -54,7 +53,7 @@ useFocusEffect(
       const userId = decodedToken.userId;
       setUserId(userId);
       
-      await axios.get(`http://192.168.0.102:8000/groups/admin/${userId}`)
+      await axios.get(`https://ma-app.vercel.app/groups/admin/${userId}`)
           .then((response) => {
               reqCaterer(response.data)
           }).catch((error) => {
@@ -71,7 +70,6 @@ useFocusEffect(
                 numOfRequests++
             }
         }
-        console.log("Anzahl", numOfRequests);
         setRequestNum(numOfRequests);
     }
 

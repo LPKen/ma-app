@@ -30,7 +30,7 @@ const EditSubject = () => {
 
     const getSubject = async () => {
         axios
-        .get(`http://192.168.0.102:8000/editsubject/${subject}`)
+        .get(`https://ma-app.vercel.app/editsubject/${subject}`)
         .then((response) => {
             setName(response.data[0].name);
             setWeight(response.data[0].weight + "");
@@ -52,7 +52,7 @@ const EditSubject = () => {
                 Subject.weight = 1;
             }
             // send a POST  request to the backend API to register the user
-            axios.put(`http://192.168.0.102:8000/subject/${subject}`, Subject)
+            axios.put(`https://ma-app.vercel.app/subject/${subject}`, Subject)
                 .then((response) => {
                     setName("");
                     setWeight("");

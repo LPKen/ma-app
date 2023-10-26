@@ -17,12 +17,10 @@ const NewSemester = () => {
     const navigation = useNavigation();
     const route = useRoute();
     const { user } = route.params;
-    console.log("User:",user);
     const [newSemester, setNewSemester] = useState("");
     const handleSemester = () => {
         var ipts = [newSemester];
         const allInputsFilled = ipts.every((input) => input.trim() !== '');
-        console.log(allInputsFilled, ipts);
 
         if (allInputsFilled) {
             const Semester = {
@@ -33,11 +31,9 @@ const NewSemester = () => {
                 "owner": user,
     
             };
-            console.log("Sem:",Semester);
             // send a POST  request to the backend API to register the user
-            axios.post("http://192.168.0.102:8000/semesters", Semester)
+            axios.post("https://ma-app.vercel.app/semesters", Semester)
                 .then((response) => {
-                    console.log(response);
                     setNewSemester("");
                     navigation.navigate("Home");
                 })

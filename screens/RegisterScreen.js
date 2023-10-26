@@ -6,9 +6,10 @@ import {
     KeyboardAvoidingView,
     Pressable,
     Alert,
+    ActivityIndicator
   } from "react-native";
   import React, { useState } from "react";
-  import { useNavigation } from "@react-navigation/native";
+  import { useNavigation, useFocusEffect } from "@react-navigation/native";
   import axios from 'axios';
   
 const RegisterScreen = () => {
@@ -16,6 +17,7 @@ const RegisterScreen = () => {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const navigation = useNavigation();
+    const [loading,setLoading] = useState(false);
 
     const handleRegister = () => {
 
@@ -25,11 +27,10 @@ const RegisterScreen = () => {
             "password": password,
             "pfp": '#ffffff',
         };
-        console.log(user);
+        setLoading(true);
         // send a POST  request to the backend API to register the user
-        axios.post("http://192.168.0.102:8000/register", user)
+        axios.post("https://ma-app.vercel.app/register", user)
             .then((response) => {
-            console.log(response);
             Alert.alert(
                 "Dein Account wurde erfolgreich registriert!",
                 "Nun kannst dich nun in deinen Account einloggen."
@@ -48,6 +49,18 @@ const RegisterScreen = () => {
             });
     };
 
+    useFocusEffect(
+      React.useCallback(() => {
+      // Fetch data whenever the screen gains focus (e.g., when navigating back)
+      setLoading(false);
+      }, [])
+    );
+
+    const processLoader = () => {
+      if (loading) {
+        return <ActivityIndicator style={{marginTop: 30}} color='#FFB600' size="large"/>
+      }
+    }
 
     return (
       <View
@@ -153,15 +166,16 @@ const RegisterScreen = () => {
   
             <Pressable onPress={() => navigation.navigate("Login")} style={{
                         marginTop:20,
-                        backgroundColor: '#1B1F47',
+                        backgroundColor: '#ff4490',
                         padding: 10,
                         borderRadius: 10,
                         }}>
-                        <Text style={{color: "white", 
+                        <Text style={{
                         fontSize: 16, 
-                        fontFamily: 'InterM',
+                        fontFamily: 'InterB',
                         textAlign: "center"}}>Du hast bereits einen Account? Logge dich hier ein!</Text>
             </Pressable>
+            {processLoader()}
           </View>
         </KeyboardAvoidingView>
       </View>

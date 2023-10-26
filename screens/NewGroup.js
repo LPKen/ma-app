@@ -34,7 +34,6 @@ const NewGroup = () => {
     const handleGroup = async () => {
         var ipts = [Name, color];
         const allInputsFilled = ipts.every((input) => input.trim() !== '');
-        console.log(allInputsFilled, ipts);
 
         //fetch groups
         const token = await AsyncStorage.getItem("authToken");
@@ -42,7 +41,6 @@ const NewGroup = () => {
         const userId = decodedToken.userId;
         setUserId(userId)
 
-        console.log(userId);
 
         if (allInputsFilled) {
             const Group = {
@@ -53,9 +51,8 @@ const NewGroup = () => {
                 pfp: color,
             }
 
-            axios.post("http://192.168.0.102:8000/groups", Group)
+            axios.post("https://ma-app.vercel.app/groups", Group)
                 .then((response) => {
-                    console.log(response);
                     setName("");
                     setColor("#ffffff");
                     navigation.navigate("Gruppen");

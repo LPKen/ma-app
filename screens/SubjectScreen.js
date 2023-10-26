@@ -13,7 +13,6 @@ const SubjectScreen = () => {
 
     //we get the entire information about the subject
     const subject = route.params;
-    console.log("RPP", route.params);
     const semName = route.params.name;
     const [loading, setLoading] = useState(true);
     const newUrl = {semester:{semester_id: subject._id, name: semName}}
@@ -22,7 +21,7 @@ const SubjectScreen = () => {
 
     const fetchSub = async () => {
         axios
-            .get(`http://192.168.0.102:8000/grades/${subject.sub_id}`)
+            .get(`https://ma-app.vercel.app/grades/${subject.sub_id}`)
             .then((response) => {
                 setGrade(response.data)
                 calcPA(response.data);
@@ -33,7 +32,7 @@ const SubjectScreen = () => {
     };
 
     const updateSub = async (update) => {
-        axios.put(`http://192.168.0.102:8000/subjects/${subject.sub_id}`, update)
+        axios.put(`https://ma-app.vercel.app/subjects/${subject.sub_id}`, update)
             .then((response) => {
             })
             .catch((error) => {
@@ -99,7 +98,7 @@ const SubjectScreen = () => {
                 onPress: () => {
 
                 axios
-                    .delete(`http://192.168.0.102:8000/deletegrades/${id}`)
+                    .delete(`https://ma-app.vercel.app/deletegrades/${id}`)
                     .then((response) => {
                         fetchSub();
                     })
@@ -122,10 +121,9 @@ const SubjectScreen = () => {
                 <Pressable onPress={() => navigation.navigate("Semester",route.params)} style={{paddingBottom:10, paddingTop:15}}>
                     <Ionicons name="arrow-back-outline" size={36} color="white" />
                 </Pressable>
-                <View style={{flexDirection: 'row',alignItems: 'center'}}>
-                    <Text style={{color: '#FFB600',fontSize: 40, fontFamily: 'PDBold' }}>{subject.sub_name}</Text>
+                <View style={{flexDirection: 'row',alignItems: 'center', flexWrap: 'wrap'}}>
+                    <Text style={{color: '#FFB600',fontSize: 40, fontFamily: 'PDBold', marginRight: 10 }}>{subject.sub_name}</Text>
                         <Pressable onPress={() => navigation.navigate("NewGrade", subject)}style={{
-                                marginLeft: 10, 
                                 textAlign: 'center',
                                 borderRadius: 5
                                 }}>
@@ -138,13 +136,22 @@ const SubjectScreen = () => {
                     padding: 20, 
                     borderRadius: 20, 
                     marginTop: 20,
-
                     }}>
-                    <Text style={{
-                        fontSize: 24,
-                        fontFamily: 'PDSemi',
-                        color: '#FFB600'
-                    }}>{post.name}</Text>
+                    <View style={{
+                        flexDirection:'row',
+                        marginTop: 10,
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        }}>
+                        <Text style={{
+                            fontSize: 24,
+                            fontFamily: 'PDSemi',
+                            color: '#FFB600'
+                        }}>{post.name}</Text>
+                        <Pressable onPress={() => handleDelete(post._id)}>
+                            <Ionicons name="ios-trash-outline" size={26} color='#FFB600' />
+                        </Pressable>
+                    </View>
                     <Text style={{marginTop: 7, fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Note: {post.grade}</Text>
                     <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Gewichtung: {post.weight}</Text>
                     <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Lernmethoden:</Text>
@@ -160,11 +167,6 @@ const SubjectScreen = () => {
                     <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Anzahl Lerntage: {post.days}</Text>
                     <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Anzahl Lernstunden: {post.hours}</Text>
                     <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Tipps: {post.tips}</Text>
-                    <View style={{flexDirection:'row', marginTop: 10}}>
-                            <Pressable onPress={() => handleDelete(post._id)}>
-                                <Ionicons name="ios-trash-outline" size={26} color='#FFB600' />
-                            </Pressable>
-                        </View>
                 </Pressable>
                 ))}
             </View>

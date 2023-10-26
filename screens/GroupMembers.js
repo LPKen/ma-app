@@ -19,7 +19,7 @@ const GroupMembers = () => {
 
   const fetchMembers = async (group) => {
     await axios
-    .get(`http://192.168.0.102:8000/groups/users/${group}`)
+    .get(`https://ma-app.vercel.app/groups/users/${group}`)
         .then((response) => {
             findUsers(response.data[0].members)
         }).catch((error) => {
@@ -36,7 +36,7 @@ const GroupMembers = () => {
     let userArray = [];
     for (i = 0; i < users.length; i++) {
       await axios
-            .get(`http://192.168.0.102:8000/users/${users[i]}`)
+            .get(`https://ma-app.vercel.app/users/${users[i]}`)
             .then((response) => {
               if (response.data._id != userId) {
                 userArray.push(response.data);
@@ -65,7 +65,7 @@ const GroupMembers = () => {
 
   const getAdmin = async (group) => {
 
-    await axios.get(`http://192.168.0.102:8000/groups/gadmin/${group}`)
+    await axios.get(`https://ma-app.vercel.app/groups/gadmin/${group}`)
             .then((response) => {
               if (userId === response.data[0].admin) {
                 setIsAdmin(true);
@@ -114,10 +114,8 @@ const GroupMembers = () => {
   }
 
   const leave = async (j) => {
-    console.log(group);
-    await axios.post(`http://192.168.0.102:8000/groups/leave/${group._id}`, {user_id: j})
+    await axios.post(`https://ma-app.vercel.app/groups/leave/${group._id}`, {user_id: j})
         .then((response) => {
-            console.log(response);
             if (j == userId) {
               checkAdmin();
               navigation.navigate("Gruppen");
@@ -135,16 +133,15 @@ const GroupMembers = () => {
   if (isAdmin) {
       if (members[0] != undefined) {
         const newAdmin = {admin: members[0]._id}
-        await axios.put(`http://192.168.0.102:8000/groups/newAdmin/${group._id}`, newAdmin)
+        await axios.put(`https://ma-app.vercel.app/groups/newAdmin/${group._id}`, newAdmin)
           .then((response) => {
-              console.log(response);
           })
           .catch((error) => {
               console.log("Ablehnung gescheitert", error);
         });
       } else {
         await axios
-        .delete(`http://192.168.0.102:8000/groups/${group._id}`)
+        .delete(`https://ma-app.vercel.app/groups/${group._id}`)
         .then((response) => {
             navigation.navigate("Gruppen");
         })
@@ -169,7 +166,7 @@ const GroupMembers = () => {
             onPress: () => {
               //delete semester
             axios
-                .delete(`http://192.168.0.102:8000/groups/${id}`)
+                .delete(`https://ma-app.vercel.app/groups/${id}`)
                 .then((response) => {
                     navigation.navigate("Gruppen");
                 })

@@ -63,7 +63,7 @@ const HomeScreen = () => {
         const userId = decodedToken.userId;
         setUserId(userId);
         axios
-            .get(`http://192.168.0.102:8000/semesters/${userId}`)
+            .get(`https://ma-app.vercel.app/semesters/${userId}`)
             .then((response) => {
                 setSemester(response.data)
                 setLoading(false);
@@ -95,7 +95,7 @@ const HomeScreen = () => {
         setUserId(userId);
 
         axios
-            .get(`http://192.168.0.102:8000/users/${userId}`)
+            .get(`https://ma-app.vercel.app/users/${userId}`)
             .then((response) => {
             setUsers(response.data);
             })
@@ -118,7 +118,7 @@ const HomeScreen = () => {
                 onPress: () => {
                   //delete semester
                 axios
-                    .delete(`http://192.168.0.102:8000/semesters/${id}`)
+                    .delete(`https://ma-app.vercel.app/semesters/${id}`)
                     .then((response) => {
                         fetchSem();
                         console.log(response);
@@ -128,7 +128,7 @@ const HomeScreen = () => {
                     })
                 
                 axios
-                    .get(`http://192.168.0.102:8000/subjects/${id}`)
+                    .get(`https://ma-app.vercel.app/subjects/${id}`)
                     .then((response) => {
                         const subId = response.data;
                         deleteGrades(subId);
@@ -138,7 +138,7 @@ const HomeScreen = () => {
                 
                 //this one mustn't run before the one above    
                 axios
-                    .delete(`http://192.168.0.102:8000/subjects/${id}`)
+                    .delete(`https://ma-app.vercel.app/subjects/${id}`)
                     .then((response) => {
                     })
                     .catch((error) => {
@@ -154,7 +154,7 @@ const HomeScreen = () => {
     const deleteGrades = (id) => {
         for (i = 0; i < id.length; i++) {
             axios
-                .delete(`http://192.168.0.102:8000/grades/${id[i]._id}`)
+                .delete(`https://ma-app.vercel.app/grades/${id[i]._id}`)
                 .then((response) => {
                 })
                 .catch((error) => {
@@ -200,19 +200,18 @@ const HomeScreen = () => {
                                 backgroundColor: '#1B1F47'
         
                                 }}>
-                                <View style={{flexDirection: 'row', alignItems: 'center',flexWrap:'wrap'}}>
+                                <View style={{
+                                    flexDirection:'row', 
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                    marginBottom: 5
+                                }}>
                                     <Text style={{
-                                        fontSize: 26,
+                                        fontSize: 24,
                                         color: '#FFB600',
                                         fontFamily: 'PDSemi',
-                                        marginRight: 25
                                     }}>{post.name}</Text>
-                                </View>
-                                <View style={{marginTop: 5}}>
-                                    <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Notenschnitt: {post.average}</Text>
-                                    <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Pluspunkte: {post.pluspoints}</Text>
-                                </View>
-                                <View style={{flexDirection:'row', marginTop: 10}}>
+                                    <View style={{flexDirection:'row', alignItems: 'center'}}>
                                         <Pressable onPress={() => navigation.navigate("EditSemester", {semester: post._id})}>
                                             <Ionicons name="ios-create-outline" size={26} color='#FFB600' />
                                         </Pressable>
@@ -220,6 +219,11 @@ const HomeScreen = () => {
                                             <Ionicons name="ios-trash-outline" size={26} color='#FFB600' />
                                         </Pressable>
                                     </View>
+                                </View>
+                                <View style={{marginTop: 5}}>
+                                    <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Notenschnitt: {post.average}</Text>
+                                    <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Pluspunkte: {post.pluspoints}</Text>
+                                </View>
                             </Pressable>
                             ))}
                         </View>
