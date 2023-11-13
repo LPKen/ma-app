@@ -221,8 +221,14 @@ const HomeScreen = () => {
                                     </View>
                                 </View>
                                 <View style={{marginTop: 5}}>
-                                    <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Notenschnitt: {post.average}</Text>
-                                    <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Pluspunkte: {post.pluspoints}</Text>
+                                    <View style={{flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#242853', padding: 10, borderRadius: 10, marginBottom: 5}}>
+                                        <Text style={{fontSize: 16, fontFamily: 'InterB', color: 'white'}}>Notenschnitt</Text>
+                                        <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>{post.average}</Text>
+                                    </View>
+                                    <View style={{flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#242853', padding: 10, borderRadius: 10, marginBottom: 5}}>
+                                        <Text style={{fontSize: 16, fontFamily: 'InterB', color: 'white'}}>Pluspunkte</Text>
+                                        <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>{post.pluspoints}</Text>
+                                    </View>
                                 </View>
                             </Pressable>
                             ))}

@@ -24,7 +24,7 @@ app.use(passport.initialize());
 const jwt = require('jsonwebtoken');
 
 mongoose.connect(
-    process.env.MONGODB_URI,
+    "mongodb+srv://email5li:RZA7Ny2yzlN7sqbx1f4Z@ma.a0co3iz.mongodb.net/",
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,

@@ -18,6 +18,7 @@ const SubjectScreen = () => {
     const newUrl = {semester:{semester_id: subject._id, name: semName}}
     //encodeURIComponent(term);
     const navigation = useNavigation();
+    const [subjectStats, setSubjectStats] = useState({});
 
     const fetchSub = async () => {
         axios
@@ -68,6 +69,7 @@ const SubjectScreen = () => {
             }
         }
         updateSub(pa);
+        setSubjectStats(pa);
         return pa;
     }
 
@@ -117,59 +119,104 @@ const SubjectScreen = () => {
             return <ActivityIndicator style={{marginTop: 200}} color='#FFB600' size="large"/>
         } else {
             return (
-                <View style={{padding: 20}}>
-                <Pressable onPress={() => navigation.navigate("Semester",route.params)} style={{paddingBottom:10, paddingTop:15}}>
-                    <Ionicons name="arrow-back-outline" size={36} color="white" />
-                </Pressable>
-                <View style={{flexDirection: 'row',alignItems: 'center', flexWrap: 'wrap'}}>
-                    <Text style={{color: '#FFB600',fontSize: 40, fontFamily: 'PDBold', marginRight: 10 }}>{subject.sub_name}</Text>
-                        <Pressable onPress={() => navigation.navigate("NewGrade", subject)}style={{
-                                textAlign: 'center',
-                                borderRadius: 5
-                                }}>
-                                <Ionicons name="add-circle-outline" size={40} color="#FFB600" />
-                            </Pressable>
-                </View>
-                {grade.map((post,index) => (
-                <Pressable key={Math.random()} style={{
-                    backgroundColor: '#1B1F47',
-                    padding: 20, 
-                    borderRadius: 20, 
-                    marginTop: 20,
+<View style={{padding: 20}}>
+    <Pressable onPress={() => navigation.navigate("Semester",route.params)} style={{paddingBottom:10, paddingTop:15}}>
+        <Ionicons name="arrow-back-outline" size={36} color="white" />
+    </Pressable>
+    <View style={{backgroundColor: '#1b1f47', padding: 20, borderRadius: 20, marginBottom: 30}}>
+        <Text style={{
+            color: '#FFB600',
+            fontSize: 32, 
+            fontWeight: 'medium', 
+            fontFamily: 'PDBold',
+            marginBottom: 15,
+            }}>{subject.sub_name}</Text>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#242853', padding: 10, borderRadius: 10, marginBottom: 5}}>
+            <Text style={{fontSize: 19, fontFamily: 'InterB', color: 'white'}}>Pluspunkte</Text>
+            <Text style={{fontSize: 19, fontFamily: 'InterB', color: 'white'}}>{subjectStats.pluspoints}</Text>
+        </View>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#242853', padding: 10, borderRadius: 10, marginBottom: 5}}>
+            <Text style={{fontSize: 19, fontFamily: 'InterB', color: 'white'}}>Notenschnitt</Text>
+            <Text style={{fontSize: 19, fontFamily: 'InterB', color: 'white'}}>{subjectStats.average}</Text>
+        </View>
+        <View style={{flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', marginTop: 10}}>
+            <Text style={{
+                color: 'white',
+                fontSize: 24, 
+                fontWeight: 'medium', 
+                fontFamily: 'InterB',
+                marginRight: 10,
+                }}>Neue Note</Text>
+            <Pressable onPress={() => navigation.navigate("NewGrade", subject)}style={{
+                    textAlign: 'center',
+                    borderRadius: 5
                     }}>
-                    <View style={{
-                        flexDirection:'row',
-                        marginTop: 10,
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        }}>
-                        <Text style={{
-                            fontSize: 24,
-                            fontFamily: 'PDSemi',
-                            color: '#FFB600'
-                        }}>{post.name}</Text>
-                        <Pressable onPress={() => handleDelete(post._id)}>
-                            <Ionicons name="ios-trash-outline" size={26} color='#FFB600' />
-                        </Pressable>
-                    </View>
-                    <Text style={{marginTop: 7, fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Note: {post.grade}</Text>
-                    <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Gewichtung: {post.weight}</Text>
-                    <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Lernmethoden:</Text>
-                        <View>
-                                {post.methods.map((content,index) => (
-                                    <Text key={index} style={{ 
-                                    fontFamily: 'PDSemi',
-                                    fontSize: 16,
-                                    color: '#FFB600',
-                                    }}>- {content}</Text>
-                                ))}
-                            </View>
-                    <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Anzahl Lerntage: {post.days}</Text>
-                    <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Anzahl Lernstunden: {post.hours}</Text>
-                    <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Tipps: {post.tips}</Text>
+                    <Ionicons name="add-circle-outline" size={28} color="#FFB600" />
+            </Pressable>
+        </View>
+    </View>
+    {grade.map((post,index) => (
+        <Pressable key={Math.random()} style={{
+            backgroundColor: '#1B1F47',
+            padding: 20, 
+            borderRadius: 20, 
+            marginTop: 20,
+            }}>
+            <View style={{
+                flexDirection:'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: 15,
+                }}>
+                <Text style={{
+                    fontSize: 24,
+                    fontFamily: 'PDSemi',
+                    color: '#FFB600'
+                }}>{post.name}</Text>
+                <Pressable onPress={() => handleDelete(post._id)}>
+                    <Ionicons name="ios-trash-outline" size={26} color='#FFB600' />
                 </Pressable>
-                ))}
             </View>
+            <View style={{flexDirection: 'row', marginBottom: 5}}>
+                <View style={{flexDirection: 'row', flex: 1, justifyContent: 'space-between', backgroundColor: '#242853', padding: 10, borderRadius: 10,flexWrap: 'wrap'}}>
+                    <Text style={{fontSize: 16, fontFamily: 'InterB', color: 'white'}}>Note</Text>
+                    <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>{post.grade}</Text>
+                </View>
+                <View style={{flexDirection: 'row', flex: 1, justifyContent: 'space-between', backgroundColor: '#242853', padding: 10, borderRadius: 10, marginLeft: 5,flexWrap: 'wrap'}}>
+                    <Text style={{fontSize: 16, fontFamily: 'InterB', color: 'white'}}>Gewichtung</Text>
+                    <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>{post.weight}</Text>
+                </View>
+            </View>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between',backgroundColor: '#242853', padding: 10, borderRadius: 10, marginBottom: 5,flexWrap: 'wrap'}}>
+                <Text style={{fontSize: 16, fontFamily: 'InterB', color: 'white'}}>Anzahl Lerntage</Text>
+                <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>{post.days}</Text>
+            </View>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between',backgroundColor: '#242853', padding: 10, borderRadius: 10, marginBottom: 5, flexWrap: 'wrap'}}>
+                <Text style={{fontSize: 16, fontFamily: 'InterB', color: 'white'}}>Anzahl Lernstunden</Text>
+                <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>{post.hours}</Text>
+            </View>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between',backgroundColor: '#242853', padding: 10, borderRadius: 10, marginBottom: 5, flexWrap: 'wrap'}}>
+                <Text style={{fontSize: 16, fontFamily: 'InterB', color: 'white', marginRight: 5}}>Tipps</Text>
+                <Text style={{fontSize: 16,
+                    fontFamily: 'InterM',
+                    color: 'white',
+                    }}>{post.tips}</Text>
+            </View>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between',backgroundColor: '#242853', padding: 10, borderRadius: 10, marginBottom: 5, flexWrap: 'wrap'}}>
+                <Text style={{fontSize: 16, fontFamily: 'InterB', color: 'white'}}>Lernmethoden</Text>
+                <View>
+                    {post.methods.map((content,index) => (
+                        <Text key={index} style={{ 
+                        fontFamily: 'InterM',
+                        fontSize: 16,
+                        color: 'white',
+                        }}>- {content}</Text>
+                    ))}
+                </View>
+            </View>
+        </Pressable>
+    ))}
+</View>
             )
         }
     }

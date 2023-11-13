@@ -11,6 +11,7 @@ const SemesterScreen = () => {
     const [loading, setLoading] = useState(true);
     const [shared, setShared] = useState([]);
     const [shareText, setShareText] = useState([]);
+    const [semesterStats, setSemesterStats] = useState({});
 
     //we get the entire information about the semester
     const semester = route.params;
@@ -96,6 +97,7 @@ const SemesterScreen = () => {
             }
         }
         updateSem(pa);
+        setSemesterStats(pa);
         return pa;
     }
 
@@ -144,20 +146,37 @@ const SemesterScreen = () => {
                 <Pressable onPress={() => navigation.navigate("Home")} style={{paddingBottom:10,paddingTop:15}}>
                     <Ionicons name="arrow-back-outline" size={36} color="white" />
                 </Pressable>
-                    <View style={{flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap'}}>
+                    <View style={{backgroundColor: '#1b1f47', padding: 20, borderRadius: 20, marginBottom: 30}}>
                         <Text style={{
                             color: '#FFB600',
-                            fontSize: 40, 
+                            fontSize: 32, 
                             fontWeight: 'medium', 
                             fontFamily: 'PDBold',
-                            marginRight: 10,
+                            marginBottom: 15,
                             }}>{semester.name}</Text>
+                        <View style={{flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#242853', padding: 10, borderRadius: 10, marginBottom: 5}}>
+                            <Text style={{fontSize: 19, fontFamily: 'InterB', color: 'white'}}>Pluspunkte</Text>
+                            <Text style={{fontSize: 19, fontFamily: 'InterB', color: 'white'}}>{semesterStats.pluspoints}</Text>
+                        </View>
+                        <View style={{flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#242853', padding: 10, borderRadius: 10, marginBottom: 5}}>
+                            <Text style={{fontSize: 19, fontFamily: 'InterB', color: 'white'}}>Notenschnitt</Text>
+                            <Text style={{fontSize: 19, fontFamily: 'InterB', color: 'white'}}>{semesterStats.average}</Text>
+                        </View>
+                        <View style={{flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', marginTop: 10}}>
+                            <Text style={{
+                                color: 'white',
+                                fontSize: 24, 
+                                fontWeight: 'medium', 
+                                fontFamily: 'InterB',
+                                marginRight: 10,
+                                }}>Neues Fach</Text>
                             <Pressable onPress={() => navigation.navigate("NewSubject", {name: semester.name, _id: semester._id})}style={{
                                     textAlign: 'center',
                                     borderRadius: 5
                                     }}>
-                                    <Ionicons name="add-circle-outline" size={40} color="#FFB600" />
+                                    <Ionicons name="add-circle-outline" size={28} color="#FFB600" />
                             </Pressable>
+                        </View>
                     </View>
                     {subjects.map((post,index) => (
                     <Pressable key={Math.random() * 10000000} onPress={() => navigation.navigate("Subjects", { sub_id: post._id, sub_name: post.name, name: semester.name, _id: semester._id })} style={{
@@ -171,7 +190,7 @@ const SemesterScreen = () => {
                             flexDirection:'row', 
                             justifyContent: 'space-between',
                             alignItems: 'center',
-                            marginBottom: 5
+                            marginBottom: 15
                             }}>
                             <Text style={{
                                 fontSize: 24,
@@ -187,16 +206,27 @@ const SemesterScreen = () => {
                                 </Pressable>
                             </View>
                         </View>
-                        <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Pluspunkte: {post.pluspoints}</Text>
-                        <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Notenschnitt: {post.average}</Text>
-                        <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>Gewichtung: {post.weight}</Text>
+                        <View style={{flexDirection: 'row', marginBottom: 5}}>
+                            <View style={{flexDirection: 'row', flex: 1, justifyContent: 'space-between', backgroundColor: '#242853', padding: 10, borderRadius: 10}}>
+                                <Text style={{fontSize: 16, fontFamily: 'InterB', color: 'white'}}>Pluspunkte</Text>
+                                <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>{post.pluspoints}</Text>
+                            </View>
+                            <View style={{flexDirection: 'row', flex: 1, justifyContent: 'space-between', backgroundColor: '#242853', padding: 10, borderRadius: 10, marginLeft: 5}}>
+                                <Text style={{fontSize: 16, fontFamily: 'InterB', color: 'white'}}>Gewichtung</Text>
+                                <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>{post.weight}</Text>
+                            </View>
+                        </View>
+                        <View style={{flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#242853', padding: 10, borderRadius: 10, marginBottom: 5}}>
+                            <Text style={{fontSize: 16, fontFamily: 'InterB', color: 'white'}}>Notenschnitt</Text>
+                            <Text style={{fontSize: 16, fontFamily: 'InterM', color: 'white'}}>{post.average}</Text>
+                        </View>
                         <Pressable onPress={() => updateShared(index)} style={{
                                 backgroundColor: shared[index]? '#FFB600': '#ff4490',
                                 padding: 5,
                                 borderRadius: 5,
                                 width: 200,
                                 alignItems: 'center',
-                                marginTop: 15
+                                marginTop: 10
                         }}>
                             <Text style={{fontFamily: 'InterB', fontSize: 16}}>{shareText[index]}</Text>
                         </Pressable>

@@ -165,11 +165,30 @@ const AccountScreen = () => {
                     />
             </View>
 
+  
+            <Pressable
+              onPress={handleRegister}
+              style={{
+                padding: 10,
+                        borderRadius: 20,
+                        width: '100%',
+                        backgroundColor: '#1b1f47',
+                        marginTop: 50,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 24, textAlign: 'center', fontFamily: 'InterM', color: 'white'
+                }}
+              >
+                Speichern
+              </Text>
+            </Pressable>
             <Pressable onPress={() => navigation.navigate('NewPassword',{user: user})} style={{
                 backgroundColor: '#1b1f47',
                 padding: 10,
                 borderRadius: 20,
-                marginTop: 100,
+                marginTop: 20,
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexDirection: 'row',
@@ -181,25 +200,6 @@ const AccountScreen = () => {
                         color: 'white',
                         marginLeft: 5,
                     }}>Passwort ändern</Text>
-            </Pressable>
-  
-            <Pressable
-              onPress={handleRegister}
-              style={{
-                padding: 10,
-                        borderRadius: 20,
-                        width: '100%',
-                        backgroundColor: '#1b1f47',
-                        marginTop: 20,
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 24, textAlign: 'center', fontFamily: 'InterM', color: 'white'
-                }}
-              >
-                Speichern
-              </Text>
             </Pressable>
           </View>
         </KeyboardAvoidingView>

@@ -124,7 +124,12 @@ const GroupSubjects = () => {
 
   const content = () => {
     if (loading) {
-        return <ActivityIndicator style={{marginTop: 200}} color='#FFB600' size="large"/>
+      return (
+        <View>
+            <ActivityIndicator style={{marginTop: 200, marginBottom: 20}} color='#FFB600' size="large"/>
+            <Text style={{fontSize: 16, fontFamily:"InterB", color: '#FFB600', textAlign: 'center', padding: 20}}>Es müssen viele Daten geladen werden. Dies könnte einen Moment dauern.</Text>
+        </View>
+    )
     } else {
         return (
           <View style={{padding: 20}}>

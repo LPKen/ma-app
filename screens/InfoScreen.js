@@ -75,7 +75,7 @@ const InfoScreen = () => {
                     fontFamily: 'PDBold',
                     fontWeight: 'medium',
                     color: 'black',
-                }}>Scalearn - Das Tutorial (kommt bald)</Text>
+                }}>Scalearn - Häufige Fragen</Text>
             </Pressable>
             <Text style={{color: 'white',fontSize: 24, fontFamily: 'InterM'}}>
             Aktuelle Artikel

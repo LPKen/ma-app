@@ -178,7 +178,7 @@ const GroupStatistics = () => {
   }
 
 
-  const avgGradeHours = (GHArray, user) => {
+    const avgGradeHours = (GHArray, user) => {
     const resultArray = [];
 
     axios
@@ -286,9 +286,9 @@ const GroupStatistics = () => {
         
         const resultArray = [];
 
-        const methodsMap = new Map(); // Map to track grades and method occurrences
+        const methodsMap = new Map();
 
-        // Iterate through the original array
+        // Die Daten nach unterschiedlichen Methoden sortieren
         gradeMethods.forEach(item => {
             if (item.methods != []) {
                 item.methods.forEach(method => {
@@ -301,21 +301,21 @@ const GroupStatistics = () => {
             }
         });
 
-        // Calculate the average grade for each method
+        // Durchschnittsnote jeder Lernmethode berechnen
         for (const [method, data] of methodsMap) {
-        const grades = data.grades;
-        const totalGrade = grades.reduce((sum, grade) => sum + grade, 0);
-        const averageGrade = Math.round(totalGrade / grades.length *100)/100;
-        resultArray.push({
-            label: method.substring(0, 3),
-            value: averageGrade,
-            topLabelComponent: () => (
-                <Text style={{color: 'white', fontSize: 12, marginBottom: 6}}>{averageGrade}</Text>
-            ),
-        });
+            const grades = data.grades;
+            const totalGrade = grades.reduce((sum, grade) => sum + grade, 0);
+            const averageGrade = Math.round(totalGrade / grades.length *100)/100;
+            resultArray.push({
+                label: method.substring(0, 3),
+                value: averageGrade,
+                topLabelComponent: () => (
+                    <Text style={{color: 'white', fontSize: 12, marginBottom: 6}}>{averageGrade}</Text>
+                ),
+            });
         }
 
-        // Sort the resultArray by frequency in descending order
+        // Array absteigend sortieren
         resultArray.sort((a, b) => b.value - a.value);
 
 
