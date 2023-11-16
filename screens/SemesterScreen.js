@@ -163,17 +163,21 @@ const SemesterScreen = () => {
                             <Text style={{fontSize: 19, fontFamily: 'InterB', color: 'white'}}>{semesterStats.average}</Text>
                         </View>
                         <View style={{flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', marginTop: 10}}>
-                            <Text style={{
-                                color: 'white',
-                                fontSize: 24, 
-                                fontWeight: 'medium', 
-                                fontFamily: 'InterB',
-                                marginRight: 10,
-                                }}>Neues Fach</Text>
                             <Pressable onPress={() => navigation.navigate("NewSubject", {name: semester.name, _id: semester._id})}style={{
                                     textAlign: 'center',
-                                    borderRadius: 5
+                                    borderRadius: 5,
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    flexWrap: 'wrap',
+                                    marginTop: 10
                                     }}>
+                                        <Text style={{
+                                    color: 'white',
+                                    fontSize: 24, 
+                                    fontWeight: 'medium', 
+                                    fontFamily: 'InterB',
+                                    marginRight: 10,
+                                    }}>Neues Fach</Text>
                                     <Ionicons name="add-circle-outline" size={28} color="#FFB600" />
                             </Pressable>
                         </View>

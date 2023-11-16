@@ -28,6 +28,7 @@ import EditSubject from './screens/EditSubject';
 import EditGroup from './screens/EditGroup';
 import AccountScreen from './screens/AccountScreen';
 import NewPassword from './screens/NewPassword';
+import GradeCalculator from './screens/GradeCalculator';
 
 
 const StackNavigator = () => {
@@ -155,6 +156,11 @@ const StackNavigator = () => {
                 <Tab.Screen name="Tutorial" component={TutorialScreen} options={{
                     tabBarButton: () => null,
                     tabBarVisible:false,
+                    }}/>
+                <Tab.Screen name="Calculator" component={GradeCalculator} options={{
+                    tabBarButton: () => null,
+                    tabBarVisible:false,
+                    headerShown: false,
                     }}/>
             </Tab.Navigator>
         )

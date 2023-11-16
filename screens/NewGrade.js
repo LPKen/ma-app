@@ -30,6 +30,7 @@ const NewGrade = () => {
     const [special, setSpecial] = useState(false);
     const [specialText, setSpecialText] = useState("Normal");
     const [tips, setTips] = useState("");
+    const [disabledSubmit,setDisabledSubmit] = useState(false);
 
     const learnmethods = [
         "Aufgaben/Fallbeispiele lösen", "Texte/Artikel/Unterlagen lesen", "Zusammenfassungen schreiben",
@@ -38,6 +39,7 @@ const NewGrade = () => {
     ]
     const [selMethods, setSelMethods] = useState([]);
     const handleGrade = () => {
+        setDisabledSubmit(true);
         var ipts = [Weight, GradeV, Name];
         const allInputsFilled = ipts.every((input) => input.trim() !== '');
 
@@ -77,9 +79,11 @@ const NewGrade = () => {
                     setSelMethods([]);
                     setTips("");
                     navigation.navigate("Subjects", route.params);
+                    setDisabledSubmit(false);
                 })
                 .catch((error) => {
                     console.log("registration failed", error);
+                    setDisabledSubmit(false);
                 });
     
         } else {
@@ -359,6 +363,7 @@ const NewGrade = () => {
                         </View>
                             {displayFurther()}
                         <Pressable
+                            disabled={disabledSubmit}
                             onPress={handleGrade}
                             style=
                             {{

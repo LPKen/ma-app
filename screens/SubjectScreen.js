@@ -69,6 +69,7 @@ const SubjectScreen = () => {
             }
         }
         updateSub(pa);
+        pa.weight = Math.round(numOfTests * 100)/100;
         setSubjectStats(pa);
         return pa;
     }
@@ -139,21 +140,40 @@ const SubjectScreen = () => {
             <Text style={{fontSize: 19, fontFamily: 'InterB', color: 'white'}}>Notenschnitt</Text>
             <Text style={{fontSize: 19, fontFamily: 'InterB', color: 'white'}}>{subjectStats.average}</Text>
         </View>
-        <View style={{flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', marginTop: 10}}>
-            <Text style={{
+        <Pressable onPress={() => navigation.navigate("NewGrade", subject)} style={{
+                textAlign: 'center',
+                borderRadius: 5,
+                flexDirection: 'row',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                marginTop: 10
+                }}>
+                    <Text style={{
                 color: 'white',
-                fontSize: 24, 
+                fontSize: 22, 
                 fontWeight: 'medium', 
                 fontFamily: 'InterB',
                 marginRight: 10,
                 }}>Neue Note</Text>
-            <Pressable onPress={() => navigation.navigate("NewGrade", subject)}style={{
-                    textAlign: 'center',
-                    borderRadius: 5
-                    }}>
-                    <Ionicons name="add-circle-outline" size={28} color="#FFB600" />
+                <Ionicons name="add-circle-outline" size={25} color="#FFB600" />
+        </Pressable>
+        <Pressable onPress={() => navigation.navigate("Calculator", {stats: subjectStats, sub: subject})} style={{
+                textAlign: 'center',
+                borderRadius: 5,
+                flexDirection: 'row',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                marginTop: 5
+                }}>
+                    <Text style={{
+                    color: 'white',
+                    fontSize: 22, 
+                    fontWeight: 'medium', 
+                    fontFamily: 'InterB',
+                    marginRight: 10,
+                    }}>Notenrechner</Text>
+                    <Ionicons name="ios-calculator" size={25} color="#FFB600" />
             </Pressable>
-        </View>
     </View>
     {grade.map((post,index) => (
         <Pressable key={Math.random()} style={{
