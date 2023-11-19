@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt');
+const nodeMailer = require('nodemailer');
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -338,6 +339,66 @@ app.post("/groups/reject/:id",async(req,res) => {
     } catch(error) {
         res.sendStatus(500);
     }
+})
+
+app.post("/resetpassword/:email", async(req,res) => {
+  const email = req.params.email;
+  const code = Math.floor(Math.random()*9000000)+1000000 + "";
+
+  try {
+    const user = await User.findOne({email});
+
+    if (!user) {
+      return { success: false, message: 'User not found' };
+    }
+
+    if (code !== undefined) {
+      hashedPassword = await bcrypt.hash(code, 10);
+    }
+    
+    user.password = hashedPassword;
+    await user.save();
+
+    const recipient = email;
+    const html = `
+      <p>Hallo,</p>
+      <p>Dein Scalearn-Passwort wurde auf diesen Code gesetzt: ${code}</p>
+      <p>Sobald du dich mit diesem Code als Passwort eingeloggt hast, ändere es bitte sofort in den Einstellungen!</p>
+      <p>Hinweis: Nicht an diese E-Mail-Adresse zurückschreiben.</p>
+      <p>Herzliche Grüsse</p>
+      <p>Lior</p>
+    `
+    const transporter = nodeMailer.createTransport({
+      host: process.env.EMAIL_HOST,
+      port: 587,
+      secure: false,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      }
+    })
+    transporter.verify(function(error, success) {
+      if (error) {
+           console.log(error);
+      } else {
+           console.log('Server is ready');
+      }
+    });
+
+    const info = await transporter.sendMail({
+        from: 'Lior von Scalearn <lior@scalearn.ch>',
+        to: recipient,
+        subject: 'Scalearn | Passwort vergessen',
+        html: html
+      })
+    
+
+    res.json({ message: 'Password updated successfully and email sent', info: info.messageId });
+  }
+  catch(err) {
+    console.log('Error updating password:', err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 })
 
 //leave 😔

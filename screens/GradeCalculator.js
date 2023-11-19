@@ -23,7 +23,6 @@ const GradeCalculator = () => {
     const [dream, setDream] = useState("");
     const [weight, setWeight] = useState("");
     const [neededGrade, setneededGrade] = useState();
-    console.log("Stats",stats);
 
     const calculateGrade = (grade, weight) => {
         var ipts = [grade,weight];
@@ -31,12 +30,11 @@ const GradeCalculator = () => {
 
         if (allInputsFilled) {
             var goalGrade = parseFloat(grade) * (parseFloat(weight) + stats.weight);
-            console.log("GoalGrade", goalGrade);
             var currentGrade = stats.average * stats.weight;
-            console.log("CurrentGrade", currentGrade);
             setneededGrade(Math.round((goalGrade - currentGrade)/parseFloat(weight)*100)/100);
         }
     }
+    
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#12142A' }}>

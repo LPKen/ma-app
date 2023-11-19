@@ -29,6 +29,7 @@ import EditGroup from './screens/EditGroup';
 import AccountScreen from './screens/AccountScreen';
 import NewPassword from './screens/NewPassword';
 import GradeCalculator from './screens/GradeCalculator';
+import ResetPassword from './screens/ResetPassword';
 
 
 const StackNavigator = () => {
@@ -173,6 +174,9 @@ const StackNavigator = () => {
                 headerShown: false,
                 }}/>
             <Stack.Screen name="Register" component={RegisterScreen} options={{
+                headerShown: false
+                }}/>
+            <Stack.Screen name="ResetPassword" component={ResetPassword} options={{
                 headerShown: false
                 }}/>
             <Stack.Screen name="Tabs" component={TabScreens} options={{headerShown: false}} />

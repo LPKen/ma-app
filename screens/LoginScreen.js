@@ -55,6 +55,7 @@ const LoginScreen = () => {
         })
     }
 
+
     const processLoader = () => {
         if (loading) {
           return <ActivityIndicator style={{marginTop: 30}} color='#FFB600' size="large"/>
@@ -164,6 +165,18 @@ const LoginScreen = () => {
                         fontSize: 16, 
                         fontFamily: 'InterB',
                         textAlign: "center"}}>Du hast noch keinen Account? Hier kannst du einen erstellen!</Text>
+                    </Pressable>
+                    <Pressable onPress={() => navigation.navigate("ResetPassword")} style={{
+                        marginTop:20,
+                        backgroundColor: '#1B1F47',
+                        padding: 10,
+                        borderRadius: 10,
+                        }}>
+                        <Text style={{ 
+                        fontSize: 16, 
+                        color: '#ff4490',
+                        fontFamily: 'InterB',
+                        textAlign: "center"}}>Du hast dein Passwort vergessen?</Text>
                     </Pressable>
                     {processLoader()}
                 </View>
