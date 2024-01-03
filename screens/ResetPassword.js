@@ -10,9 +10,11 @@ import { Ionicons } from '@expo/vector-icons';
 const ResetPassword = () => {
     const navigation = useNavigation();
     const [email,setEmail] = useState("");
+    const [loading,setLoading] = useState(false);
 
     const sendMail = () => {
-        axios.post(`http://192.168.0.102:8000/resetpassword/${email}`)
+        setLoading(true);
+        axios.post(`https://ma-app.vercel.app/resetpassword/${email}`)
         .then((response) => {
             Alert.alert("Der Code wurde versendet!","Bitte kontrolliere nun deinen E-Mail-Posteingang. Die E-Mail könnte möglicherweise auch in deinem Spam-Ordner gelandet sein.")
             navigation.navigate("Login");
@@ -21,6 +23,20 @@ const ResetPassword = () => {
             console.log("sending failed", error);
         });
     }
+
+    const processLoader = () => {
+        if (loading) {
+            return <ActivityIndicator style={{marginTop: 30}} color='#FFB600' size="large"/>
+        }
+      }
+    
+    useFocusEffect(
+        React.useCallback(() => {
+        // Fetch data whenever the screen gains focus (e.g., when navigating back)
+        setLoading(false);
+        }, [])
+    );
+
     return (
         <View style={{flex: 1, backgroundColor: "#12142A"}}>
             <KeyboardAvoidingView>
@@ -72,6 +88,7 @@ const ResetPassword = () => {
                             >
                         <Text style={{ fontSize: 24, fontFamily: 'InterB', textAlign: "center"}}>Code senden</Text>
                     </Pressable>
+                    {processLoader()}
                 </View>
             </KeyboardAvoidingView>
         </View>

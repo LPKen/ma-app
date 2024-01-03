@@ -56,7 +56,7 @@ if (!loaded) {
           <Text style={{
             color: '#ffffff',
             fontSize: 20, 
-            fontFamily: 'PDSemi',
+            fontFamily: 'InterR',
             marginTop: 10,
             }}>Auf dem Bild unten sieht man den Home-Screen. Wenn man auf das (+) klickt, kann man ein neues Semester erstellen.{"\n"}{"\n"}
             Um ein neues Fach oder eine neue Prüfung zu erstellen, kann man auf dem Semester-Screen oder auf dem Fach-Screen ebenfalls auf das (+) klicken.</Text>
@@ -64,8 +64,10 @@ if (!loaded) {
               width: "auto",
               height: 250,
               resizeMode: "contain",
-              borderWidth: 3,
-              borderColor: "#00000022",
+              borderWidth: 4,
+              borderColor: "#00000044",
+              borderRadius: 20,
+              marginTop: 10
             }}
             source={
               require('../assets/neusem.png')
@@ -75,7 +77,7 @@ if (!loaded) {
           <Text style={{
             color: '#ffffff',
             fontSize: 20, 
-            fontFamily: 'PDSemi',
+            fontFamily: 'InterR',
             marginTop: 10,
             }}>Um einer Gruppe beizutreten, kannst du auf "Eine neue Gruppe suchen ..." klicken und dort den Gruppennamen eingeben. Somit wird dem Gruppenadmin eine Anfrage gesendet.{"\n"}{"\n"}
             Um eine neue Gruppe zu erstellen, klickst du auf das (+) neben "Gruppen".</Text>
@@ -83,7 +85,7 @@ if (!loaded) {
           <Text style={{
             color: '#ffffff',
             fontSize: 20, 
-            fontFamily: 'PDSemi',
+            fontFamily: 'InterR',
             marginTop: 10,
             }}>Die Statistiken befinden sich in jeder Gruppe. Du kannst darauf zugreifen, indem du auf die Gruppe klickst und dann ein Fach auswählst.{"\n"}{"\n"}
             Die Statistiken sollten den Benutzerinnen und Benutzern mehr Klarheit über die Vorbereitung auf ein bestimmtes Fach geben. Sie helfen dir dabei, zu entscheiden, wie du auf die nächste Prüfung lernen sollst.</Text>
@@ -91,7 +93,7 @@ if (!loaded) {
           <Text style={{
             color: '#ffffff',
             fontSize: 20, 
-            fontFamily: 'PDSemi',
+            fontFamily: 'InterR',
             marginTop: 10,
             }}>Klicke auf dem Home-Screen auf das Zahnrad-Symbol, um zu den Einstellungen zu gelangen. Von dort aus klickst du auf Account und kannst dort deine Angaben ändern.{"\n"}{"\n"}
             Wenn du dein Passwort ändern willst, kannst du das auch dort machen.</Text>

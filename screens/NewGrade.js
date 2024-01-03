@@ -89,6 +89,7 @@ const NewGrade = () => {
         } else {
             Alert.alert("Die Note wurde nicht hinzugefügt. 😔",
             "Bitte gib mindestens Name, Gewichtung und Note an.")
+            setDisabledSubmit(false);
         }
     }
 

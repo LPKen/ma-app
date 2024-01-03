@@ -17,6 +17,7 @@ const GroupStatistics = () => {
     const subjects = route.params.subjects;
     const {userId,setUserId} = useContext(UserType);
     const [proportionals,setProportionals] = useState(true);
+
     const [stats,setStats] = useState({
         freq_methods: [{method: "Laden ...", frequency: 1}],
         tips: ["Laden ...", "Laden ...", "Laden ..."]
@@ -207,7 +208,7 @@ const GroupStatistics = () => {
                     label: product,
                     grades: [item.grade],
                     topLabelComponent: () => (
-                        <Text style={{color: 'white', fontSize: 12, marginBottom: 6}}>{item.grade}</Text>
+                        <Text style={{color: 'white', fontSize: 12, marginBottom: 2}}>{item.grade}</Text>
                     ),
             });
             }
@@ -221,7 +222,7 @@ const GroupStatistics = () => {
         // Optional: You can remove the 'grades' array if you no longer need it.
         delete item.grades;
         item.topLabelComponent = () => (
-            <Text style={{color: 'white', fontSize: 12, marginBottom: 6}}>{item.value}</Text>
+            <Text style={{color: 'white', fontSize: 12, marginBottom: 2}}>{item.value}</Text>
         )    
     });
 
@@ -259,7 +260,7 @@ const GroupStatistics = () => {
                     label: product,
                     grades: [item.grade],
                     topLabelComponent: () => (
-                        <Text style={{color: 'white', fontSize: 12, marginBottom: 6}}>{item.grade}</Text>
+                        <Text style={{color: 'white', fontSize: 12, marginBottom: 2}}>{item.grade}</Text>
                     ),
                 });
                 }
@@ -272,7 +273,7 @@ const GroupStatistics = () => {
             // Optional: You can remove the 'grades' array if you no longer need it.
             delete item.grades;
             item.topLabelComponent = () => (
-                <Text style={{color: 'white', fontSize: 12, marginBottom: 6}}>{item.value}</Text>
+                <Text style={{color: 'white', fontSize: 12, marginBottom: 2}}>{item.value}</Text>
             )
     });
     // Sort the resultArray by frequency in ascending order
@@ -310,7 +311,7 @@ const GroupStatistics = () => {
                 label: method.substring(0, 3),
                 value: averageGrade,
                 topLabelComponent: () => (
-                    <Text style={{color: 'white', fontSize: 12, marginBottom: 6}}>{averageGrade}</Text>
+                    <Text style={{color: 'white', fontSize: 12, marginBottom: 2}}>{averageGrade}</Text>
                 ),
             });
         }
@@ -419,7 +420,8 @@ const content = () => {
                             barWidth={27}
                             initialSpacing={5}
                             spacing={15}
-                            noOfSections={3}
+                            noOfSections={6}
+                            disableScroll={true}
                             barBorderRadius={15}
                             frontColor="white"             
                             yAxisThickness={0}        
@@ -427,10 +429,10 @@ const content = () => {
                             rulesColor={'#234778'}
                             xAxisColor={'#234778'}
                             maxValue={6}
-                            height={150}
+                            height={180}
                             width={250}
                             xAxisLabelTextStyle={{color: 'white', textAlign: 'center', fontSize: 12}}
-                            yAxisTextStyle={{color: 'white', textAlign: 'center', fontSize: 12}}
+                            yAxisTextStyle={{color: '#B7C7DC', textAlign: 'center', fontSize: 12}}
                         />
                     </View>
 
@@ -451,7 +453,8 @@ const content = () => {
                             barWidth={27}
                             initialSpacing={5}
                             spacing={15}
-                            noOfSections={3}
+                            noOfSections={6}
+                            disableScroll={true}
                             barBorderRadius={15}
                             frontColor="white"             
                             yAxisThickness={0}        
@@ -459,10 +462,10 @@ const content = () => {
                             rulesColor={'#234778'}
                             xAxisColor={'#234778'}
                             maxValue={6}
-                            height={150}
+                            height={180}
                             width={250}
                             xAxisLabelTextStyle={{color: 'white', textAlign: 'center', fontSize: 12}}
-                            yAxisTextStyle={{color: 'white', textAlign: 'center', fontSize: 12}}
+                            yAxisTextStyle={{color: '#B7C7DC', textAlign: 'center', fontSize: 12}}
                         />
                     </View>
 
@@ -483,7 +486,8 @@ const content = () => {
                             barWidth={27}
                             initialSpacing={5}
                             spacing={15}
-                            noOfSections={3}
+                            noOfSections={6}
+                            disableScroll={true}
                             barBorderRadius={15}
                             frontColor="white"             
                             yAxisThickness={0}        
@@ -491,82 +495,108 @@ const content = () => {
                             rulesColor={'#234778'}
                             xAxisColor={'#234778'}
                             maxValue={6}
-                            height={150}
+                            height={180}
                             width={250}
                             xAxisLabelTextStyle={{color: 'white', textAlign: 'center', fontSize: 12}}
-                            yAxisTextStyle={{color: 'white', textAlign: 'center', fontSize: 12}}
+                            yAxisTextStyle={{color: '#B7C7DC', textAlign: 'center', fontSize: 12}}
                         />
                         <View style={{
-                            marginTop: 25,
-                            padding: 10,
-                            borderTopColor: '#234778',
-                            borderTopWidth: 1,
+                            flexDirection: 'row', 
+                            justifyContent: 'space-between', 
+                            backgroundColor: '#242853', 
+                            padding: 10, 
+                            borderRadius: 10, 
+                            marginBottom: 5, 
+                            flexWrap: 'wrap', 
+                            marginTop: 40
                             }}>
-                            <Text
-                                style={{
-                                    color: 'white',
-                                    fontSize: 16,
-                                    fontFamily: 'PDSemi'
-                                }}
-                            >Tex: Texte/Artikel/Unterlagen lesen</Text>
-                            <Text
-                                style={{
-                                    marginTop: 5,
-                                    color: 'white',
-                                    fontSize: 16,
-                                    fontFamily: 'PDSemi'
-                                }}
-                            >Auf: Aufgaben/Fallbeispiele lösen</Text>
-                            <Text
-                                style={{
-                                    marginTop: 5,
-                                    color: 'white',
-                                    fontSize: 16,
-                                    fontFamily: 'PDSemi'
-                                }}
-                            >Zus: Zusammenfassungen schreiben</Text>
-                            <Text
-                                style={{
-                                    marginTop: 5,
-                                    color: 'white',
-                                    fontSize: 16,
-                                    fontFamily: 'PDSemi'
-                                }}
-                            >Blu: Blurting</Text>
-                            <Text
-                                style={{
-                                    marginTop: 5,
-                                    color: 'white',
-                                    fontSize: 16,
-                                    fontFamily: 'PDSemi'
-                                }}
-                            >Kar: Karteikarten</Text>
-                            <Text
-                                style={{
-                                    marginTop: 5,
-                                    color: 'white',
-                                    fontSize: 16,
-                                    fontFamily: 'PDSemi'
-                                }}
-                            >Den: Den Stoff jemandem erklären</Text>
-                            <Text
-                                style={{
-                                    marginTop: 5,
-                                    color: 'white',
-                                    fontSize: 16,
-                                    fontFamily: 'PDSemi'
-                                }}
-                            >Vis: Visualisierung (z.B. Mindmap)</Text>
-                            <Text
-                                style={{
-                                    marginTop: 5,
-                                    color: 'white',
-                                    fontSize: 16,
-                                    fontFamily: 'PDSemi'
-                                }}
-                            >Vid: Videos/Präsentationen anschauen</Text>
+                            <Text style={{fontSize: 16, fontFamily: 'PDBold', color: 'white', marginRight: 10}}>Tex</Text>
+                            <Text style={{fontSize: 16, fontFamily: 'PDSemi', color: 'white'}}>Texte/Artikel/Unterlagen lesen</Text>
                         </View>
-
+                        <View style={{
+                            flexDirection: 'row', 
+                            justifyContent: 'space-between', 
+                            backgroundColor: '#242853', 
+                            padding: 10, 
+                            borderRadius: 10, 
+                            marginBottom: 5, 
+                            flexWrap: 'wrap'
+                            }}>
+                            <Text style={{fontSize: 16, fontFamily: 'PDBold', color: 'white', marginRight: 10}}>Auf</Text>
+                            <Text style={{fontSize: 16, fontFamily: 'PDSemi', color: 'white'}}>Aufgaben/Fallbeispiele lösen</Text>
+                        </View>
+                        <View style={{
+                            flexDirection: 'row', 
+                            justifyContent: 'space-between', 
+                            backgroundColor: '#242853', 
+                            padding: 10, 
+                            borderRadius: 10, 
+                            marginBottom: 5, 
+                            flexWrap: 'wrap'
+                            }}>
+                            <Text style={{fontSize: 16, fontFamily: 'PDBold', color: 'white', marginRight: 10}}>Zus</Text>
+                            <Text style={{fontSize: 16, fontFamily: 'PDSemi', color: 'white'}}>Zusammenfassungen schreiben</Text>
+                        </View>
+                        <View style={{
+                            flexDirection: 'row', 
+                            justifyContent: 'space-between', 
+                            backgroundColor: '#242853', 
+                            padding: 10, 
+                            borderRadius: 10, 
+                            marginBottom: 5, 
+                            flexWrap: 'wrap'
+                            }}>
+                            <Text style={{fontSize: 16, fontFamily: 'PDBold', color: 'white', marginRight: 10}}>Blu</Text>
+                            <Text style={{fontSize: 16, fontFamily: 'PDSemi', color: 'white'}}>Blurting</Text>
+                        </View>
+                        <View style={{
+                            flexDirection: 'row', 
+                            justifyContent: 'space-between', 
+                            backgroundColor: '#242853', 
+                            padding: 10, 
+                            borderRadius: 10, 
+                            marginBottom: 5, 
+                            flexWrap: 'wrap'
+                            }}>
+                            <Text style={{fontSize: 16, fontFamily: 'PDBold', color: 'white', marginRight: 10}}>Kar</Text>
+                            <Text style={{fontSize: 16, fontFamily: 'PDSemi', color: 'white'}}>Karteikarten</Text>
+                        </View>
+                        <View style={{
+                            flexDirection: 'row', 
+                            justifyContent: 'space-between', 
+                            backgroundColor: '#242853', 
+                            padding: 10, 
+                            borderRadius: 10, 
+                            marginBottom: 5, 
+                            flexWrap: 'wrap'
+                            }}>
+                            <Text style={{fontSize: 16, fontFamily: 'PDBold', color: 'white', marginRight: 10}}>Den</Text>
+                            <Text style={{fontSize: 16, fontFamily: 'PDSemi', color: 'white'}}>Den Stoff jemandem erklären</Text>
+                        </View>
+                        <View style={{
+                            flexDirection: 'row', 
+                            justifyContent: 'space-between', 
+                            backgroundColor: '#242853', 
+                            padding: 10, 
+                            borderRadius: 10, 
+                            marginBottom: 5, 
+                            flexWrap: 'wrap'
+                            }}>
+                            <Text style={{fontSize: 16, fontFamily: 'PDBold', color: 'white', marginRight: 10}}>Vis</Text>
+                            <Text style={{fontSize: 16, fontFamily: 'PDSemi', color: 'white'}}>Visualisierung (z.B. Mindmap)</Text>
+                        </View>
+                        <View style={{
+                            flexDirection: 'row', 
+                            justifyContent: 'space-between', 
+                            backgroundColor: '#242853', 
+                            padding: 10, 
+                            borderRadius: 10, 
+                            marginBottom: 5, 
+                            flexWrap: 'wrap'
+                            }}>
+                            <Text style={{fontSize: 16, fontFamily: 'PDBold', color: 'white', marginRight: 10}}>Vid</Text>
+                            <Text style={{fontSize: 16, fontFamily: 'PDSemi', color: 'white'}}>Videos/Präsentationen anschauen</Text>
+                        </View>
                     </View>
 
                     <View style={{flex: 1,

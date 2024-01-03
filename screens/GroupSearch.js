@@ -118,9 +118,9 @@ const GroupSearch = () => {
                             width: '100%',
                             padding: 10,
                             borderRadius: 20,
-                            color: '#FFB600',
+                            color: 'white',
                             backgroundColor: '#1B1F47',
-                            fontFamily: 'PDSemi'
+                            fontFamily: 'InterM'
                             }}
                             placeholderTextColor={"#FFFFFFAA"}
                             placeholder="Gruppe suchen"
