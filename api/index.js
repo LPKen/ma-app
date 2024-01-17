@@ -384,7 +384,7 @@ app.post("/resetpassword/:email", async(req,res) => {
     });
 
     const info = await transporter.sendMail({
-        from: 'Lior von Scalearn <lior@scalearn.ch>',
+        from: 'Scalearn <info@scalearn.ch>',
         to: recipient,
         subject: 'Scalearn | Passwort vergessen',
         html: html
@@ -621,7 +621,6 @@ app.put("/groups/newAdmin/:id",async(req,res) => {
         if (updatedData.admin !== undefined) {
             updateFields.admin = updatedData.admin;
         }
-        console.log("mmmmmmmmmmmm",updateFields, req.params);
     
         const result = await Group.findByIdAndUpdate(
             groupId,
